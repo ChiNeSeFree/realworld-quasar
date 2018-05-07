@@ -19,8 +19,14 @@ export default [
     component: () => import('layouts/default'),
     children: [
       { path: '', component: RwvHome, name: 'home' },
-      { path: 'register', component: RwvRegister, name: 'register'},
-      { path: 'login', component: RwvLogin, name: 'login'}
+      { path: 'register', component: RwvRegister, name: 'register' },
+      { path: 'login', component: RwvLogin, name: 'login' },
+      { path: 'settings', component: RwvSettings, name: 'settings' },
+      { path: 'profile', component: RwvProfileArticles, name: 'profile' },
+      { path: 'profile-favorites', component: RwvProfileFavorited, name: 'favorites' },
+      { path: 'tag/:tag', component: RwvHome, name: 'home-tag' },
+      { path: '/articles/:slug', component: RwvArticle, name: 'article', props: true },
+      { path: '/editor/:slug', component: RwvArticleEdit, name: 'article-edit', props: true },
     ]
   },
   { // Always leave this as last one
