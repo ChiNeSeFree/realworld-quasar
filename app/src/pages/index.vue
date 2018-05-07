@@ -15,7 +15,7 @@
           align="left"
           >
           <!-- Tabs - notice slot="title" -->
-          <q-tab slot="title" name="tab-1" label="Your feed" @click="loadGlobalFeed()"/>
+          <q-tab v-if="isAuth" slot="title" name="tab-1" label="Your feed" @click="loadGlobalFeed()"/>
           <q-tab default slot="title" name="tab-2" label="Global feed"/>
 
           <!-- Targets -->

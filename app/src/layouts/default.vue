@@ -68,6 +68,18 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-layout-footer>
+      <div class="container">
+        <a href="#/" class="logo-font router-link-exact-active router-link-active">
+          conduit
+        </a>
+        <span class="attribution">
+          An interactive learning project from
+          <a target="blank" href="https://thinkster.io">Thinkster</a>. Code &amp; design licensed under MIT.
+        </span>
+      </div>
+    </q-layout-footer>
   </q-layout>
 </template>
 
@@ -195,6 +207,19 @@ export default {
   .page-item:last-child .page-link
     border-bottom-right-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+  footer
+    text-align: center
+    background: #f3f3f3;
+    margin-top: 5rem;
+    padding: 1rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  .container
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
 
 
 </style>
