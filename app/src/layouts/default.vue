@@ -2,8 +2,8 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="primary"
-        :glossy="$q.theme === 'mat'"
+        color="white"
+        text-color="primary"
         :inverted="$q.theme === 'ios'"
       >
         <q-btn
@@ -16,9 +16,19 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
+        <q-toolbar-title class="navbar-brand clearfix">
+          conduit
+          <!-- <div slot="subtitle">Running on Quasar v{{ $q.version }}</div> -->
+
+          <q-btn flat class="right">
+            Sign up
+          </q-btn>
+          <q-btn flat class="right">
+            Sign in
+          </q-btn>
+          <q-btn flat class="right">
+            Home
+          </q-btn>
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
@@ -78,5 +88,32 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
+  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,700,900');
+  .clearfix:before,
+  .clearfix:after {
+    content: "";
+    display: table;
+  }
+
+  .clearfix:after {
+    clear: both;
+  }
+
+  .clearfix {
+    zoom: 1; /* ie 6/7 */
+  }
+  .right {
+    float: right;
+  }
+  body
+    font-family: "Titillium Web", sans-serif;
+  .navbar-brand
+    font-family: "Titillium Web", sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: -1px;
+    height: 3.5rem;
+
 </style>
