@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import Vuelidate from 'vuelidate'
 
 import ApiService from '../common/api.service'
 import DateFilter from '../common/date.filter'
@@ -10,6 +10,7 @@ import routes from './routes'
 
 ApiService.init()
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 const Router = new VueRouter({
   /*

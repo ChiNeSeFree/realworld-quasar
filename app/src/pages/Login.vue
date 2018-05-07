@@ -2,41 +2,51 @@
   <div class="auth-page">
     <div class="flex flex-center">
       <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
+        <div class="col-xs-12">
           <h1 class="text-xs-center">Sign in</h1>
           <p class="text-xs-center">
             <router-link :to="{ name: 'register' }">
               Need an account?
             </router-link>
           </p>
-          <ul v-if="errors" class="error-messages">
+          <!-- <ul v-if="errors" class="error-messages">
             <li
               v-for="(v, k) in errors"
               :key="k">
               {{k}} {{ v | error }}
             </li>
-          </ul>
-          <form v-on:submit="onSubmit(email, password)">
-            <q-field class="form-group">
+          </ul> -->
+          <form @submit.prevent="()=>{}">
+            <q-field
+              class="form-group"
+              :error="$v.form.email.$error"
+              error-label="Please enter valid email address"
+              >
               <q-input
                 class="form-control form-control-lg"
                 type="text"
-                v-model="email"
+                v-model="form.email"
                 placeholder="Email">
               </q-input>
             </q-field>
-            <q-field class="form-group">
+            <q-field
+              class="form-group"
+              :error="$v.form.password.$error"
+              error-label="Please enter your password"
+              >
               <q-input
                 class="form-control form-control-lg"
                 type="password"
-                v-model="password"
+                v-model="form.password"
                 placeholder="Password">
               </q-input>
             </q-field>
             <q-btn
               color="primary"
               label="Sign in"
-              class="right">
+              class="right"
+              @click="onSubmit($event)"
+              >
             </q-btn>
           </form>
         </div>
@@ -47,20 +57,43 @@
 <script>
 import { mapState } from 'vuex'
 import { LOGIN } from '../store/actions.type'
+import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   name: 'RwvLogin',
-  data () {
+  data() {
     return {
-      email: null,
-      password: null
+      form: {
+        email: '',
+        password: ''
+      },
+      submit: false,
+      error: false
+    }
+  },
+  validations: {
+    form: {
+      email: { required, email },
+      password: { required }
     }
   },
   methods: {
     onSubmit (email, password) {
+
+      this.$v.form.$touch()
+
+      if (this.$v.form.$error || this.$v.form.$invalid) {
+        return false
+      }
+
+      this.submit = true
+
       this.$store
         .dispatch(LOGIN, { email, password })
-        .then(() => this.$router.push({ name: 'home' }))
+        .then(() => {
+          this.submit = false
+          this.$router.push({ name: 'home' })
+        })
     }
   },
   computed: {
