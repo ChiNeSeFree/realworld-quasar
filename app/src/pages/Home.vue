@@ -15,11 +15,15 @@
           align="left"
           >
           <!-- Tabs - notice slot="title" -->
-          <q-tab v-if="isAuth" slot="title" name="tab-1" label="Your feed" @click="loadGlobalFeed()"/>
+          <q-tab v-if="isAuth" slot="title" name="tab-1" label="Your feed"/>
           <q-tab default slot="title" name="tab-2" label="Global feed"/>
 
           <!-- Targets -->
-          <q-tab-pane name="tab-1">Tab One</q-tab-pane>
+          <q-tab-pane name="tab-1">
+            <div class="home-my-feed">
+              <RwvArticleList type="feed" />
+            </div>
+          </q-tab-pane>
           <q-tab-pane name="tab-2">
             <div class="home-global">
               <RwvArticleList type="all" />
@@ -50,6 +54,7 @@
     padding: 5px 10px 10px 10px;
     background: #f3f3f3;
     border-radius: 4px;
+    margin: 8px 20px;
   .banner
     background: $primary;
     color: white;
