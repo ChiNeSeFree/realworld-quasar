@@ -13,7 +13,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.22.1",
-    "vue-axios": "^2.1.1"
+    "vue-axios": "^2.1.1",
+    "vue-markdown": "^2.2.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",

@@ -1,5 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <!-- <q-layout view="lHh Lpr lFf"> -->
+  <q-layout view="LHh LpR ffr">
     <q-layout-header>
       <q-toolbar
         color="white"
@@ -20,15 +21,32 @@
           conduit
           <!-- <div slot="subtitle">Running on Quasar v{{ $q.version }}</div> -->
         </q-toolbar-title>
-        <q-btn flat class="gt-sm mobile-hide">
-          Sign up
-        </q-btn>
-        <q-btn flat class="gt-sm mobile-hide">
-          Sign in
-        </q-btn>
-        <q-btn flat class="gt-sm mobile-hide">
+
+
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          :to="{ name: 'login' }">
+          <i class="ion-compose"></i>Sign in
+        </router-link>
+
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          :to="{ name: 'register' }">
+          <i class="ion-compose"></i>Sign up
+        </router-link>
+
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          :to="{ name: 'home' }">
           Home
-        </q-btn>
+        </router-link>
+
       </q-toolbar>
     </q-layout-header>
 
@@ -126,6 +144,8 @@ export default {
     line-height: 1.5;
     color: #373a3c;
     background-color: #fff;
+  .logo-font
+    font-family: "Titillium Web", sans-serif;
   .navbar-brand
     font-family: "Titillium Web", sans-serif;
     font-size: 1.75rem;
@@ -152,6 +172,10 @@ export default {
     h1 {
       color: #373a3c;
     }
+  a:focus, a:hover
+    color: $secondary
+    text-decoration: underline;
+
 
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
     margin-bottom: 0.5rem
@@ -215,11 +239,31 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
+    .logo-font
+      vertical-align: middle;
+
+    .attribution
+      vertical-align: middle;
+      margin-left: 10px;
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: 300;
   .container
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
+  .page
+    margin-top: 1.5rem;
+  .q-toolbar
+    a
+      margin: 0 1rem;
+.auth-page
+  .q-btn
+    margin-top: 1rem
 
+  .flex
+    .row
+      min-width: 14rem
 
 </style>
