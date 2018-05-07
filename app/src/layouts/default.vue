@@ -27,7 +27,9 @@
           class="nav-link"
           active-class="active"
           exact
-          :to="{ name: 'login' }">
+          :to="{ name: 'login' }"
+          v-if="!isAuth"
+          >
           <i class="ion-compose"></i>Sign in
         </router-link>
 
@@ -35,6 +37,7 @@
           class="nav-link"
           active-class="active"
           exact
+          v-if="!isAuth"
           :to="{ name: 'register' }">
           <i class="ion-compose"></i>Sign up
         </router-link>
@@ -103,6 +106,8 @@
 
 <script>
 import { openURL } from 'quasar'
+import { mapGetters, mapState } from 'vuex'
+import { IS_AUTHENTICATED } from '../store/getters.type'
 
 export default {
   name: 'LayoutDefault',
@@ -110,6 +115,11 @@ export default {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
     }
+  },
+  computed: {
+    ...mapGetters({
+      isAuth: [IS_AUTHENTICATED]
+    })
   },
   methods: {
     openURL
