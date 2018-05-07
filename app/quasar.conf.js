@@ -11,8 +11,8 @@ module.exports = function (ctx) {
     ],
     extras: [
       ctx.theme.mat ? 'roboto-font' : null,
-      'material-icons'
-      // 'ionicons',
+      'material-icons',
+      'ionicons',
       // 'mdi',
       // 'fontawesome'
     ],
@@ -70,7 +70,8 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify'
-      ]
+      ],
+      iconSet: 'ionicons'
     },
     // animations: 'all' --- includes all animations
     animations: [

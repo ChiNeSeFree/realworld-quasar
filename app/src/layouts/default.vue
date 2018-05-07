@@ -88,6 +88,7 @@ export default {
 </script>
 
 <style lang="stylus">
+  @import '~variables'
   @import url('https://fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic');
   .clearfix:before,
   .clearfix:after {
@@ -105,17 +106,95 @@ export default {
   .right {
     float: right;
   }
+  html
+    color: #373a3c
   body
     font-family: "Source Sans Pro", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
     color: #373a3c;
+    background-color: #fff;
   .navbar-brand
     font-family: "Titillium Web", sans-serif;
     font-size: 1.75rem;
     font-weight: 600;
-    line-height: 48px;
+    line-height: 50px;
     letter-spacing: -1px;
     height: 3.5rem;
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  menu,
+  nav,
+  section,
+  summary
+    display: block
+  a
+    color: $primary;
+    text-decoration: none;
+    h1 {
+      color: #373a3c;
+    }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+    margin-bottom: 0.5rem
+    font-family: inherit
+    font-weight: 500
+    line-height: 1.1
+    color: inherit
+  .pull-xs-right
+    float: right !important;
+  .btn-outline-primary
+    color: #5CB85C;
+    background-image: none;
+    background-color: transparent;
+    border-color: #5CB85C;
+
+  .btn-sm, .btn-group-sm > .btn
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+
+  .btn
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+  .page-link
+    position: relative;
+    float: left;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    color: #5CB85C;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  .page-item:first-child .page-link
+    margin-left: 0;
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+  .page-item.active .page-link, .page-item.active .page-link:focus, .page-item.active .page-link:hover
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #5CB85C;
+    border-color: #5CB85C;
+  .page-item:last-child .page-link
+    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+
 
 </style>

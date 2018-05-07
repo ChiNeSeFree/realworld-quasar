@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import example from './module-example'
+import home from './home.module'
+import auth from './auth.module'
+import article from './article.module'
+import profile from './profile.module'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   modules: {
-    example
+    home,
+    auth,
+    article,
+    profile
   }
 })
-
-export default store

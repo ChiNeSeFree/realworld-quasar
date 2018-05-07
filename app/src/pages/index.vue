@@ -7,7 +7,7 @@
       </div>
     </div>
     <q-page class="flex">
-      <div class="col-xs-9">
+      <div class="col-sm-12 col-md-9">
         <q-tabs
           color="white"
           text-color="tertiary"
@@ -15,18 +15,29 @@
           align="left"
           >
           <!-- Tabs - notice slot="title" -->
-          <q-tab slot="title" name="tab-1" label="Your feed"/>
+          <q-tab slot="title" name="tab-1" label="Your feed" @click="loadGlobalFeed()"/>
           <q-tab default slot="title" name="tab-2" label="Global feed"/>
 
           <!-- Targets -->
           <q-tab-pane name="tab-1">Tab One</q-tab-pane>
-          <q-tab-pane name="tab-2">Tab Two</q-tab-pane>
+          <q-tab-pane name="tab-2">
+            <div class="home-global">
+              <RwvArticleList type="all" />
+            </div>
+          </q-tab-pane>
         </q-tabs>
       </div>
-      <div class="col-xs-3">
-        <conduit-tags>
-
-        </conduit-tags>
+      <div class="col-sm-12 col-md-3">
+        <div class="sidebar">
+          <p>Popular Tags</p>
+          <div class="tag-list">
+            <RwvTag
+              v-for="(tag, index) in tags"
+              :name="tag"
+              :key="index">
+            </RwvTag>
+          </div>
+        </div>
       </div>
     </q-page>
   </div>
@@ -34,28 +45,33 @@
 
 <style lang="stylus">
 @import '~variables'
-.home-page .banner
+.home-page
+  .sidebar
+    padding: 5px 10px 10px 10px;
+    background: #f3f3f3;
+    border-radius: 4px;
+  .banner
     background: $primary;
     color: white;
     text-align: center;
     padding: 2rem 0;
     box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
-.home-page .banner
-  h1
-    font-family: "Titillium Web", sans-serif;
-    margin: 0;
-    padding: 0;
-    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    font-weight: 700;
-    font-size: 4rem;
-    padding-bottom: 0.5rem;
-  p
-    font-size: 2rem;
+    h1
+      font-family: "Titillium Web", sans-serif;
+      margin: 0;
+      padding: 0;
+      text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      font-size: 4rem;
+      padding-bottom: 0.5rem;
+    p
+      font-size: 2rem;
 .q-tabs
   .q-tabs-panes
-    border-top: 1px solid #eee;
     margin-top: -1px;
     z-index: 2;
+    .q-tab-pane
+      padding: 0 12px 12px 12px;
 .q-tab.active
   color: $primary
   z-index: 3;
@@ -68,12 +84,33 @@
 </style>
 
 <script>
-import conduitTags from '../components/conduit-tags.vue'
+
+import { mapGetters, mapState } from 'vuex'
+import RwvTag from '../components/VTag.vue'
+import { IS_AUTHENTICATED } from '../store/getters.type'
+import { FETCH_TAGS } from '../store/actions.type'
+import RwvArticleList from '../components/ArticleList'
+
 export default {
   name: 'PageIndex',
   namespaced: true,
   components: {
-    conduitTags,
+    RwvTag,
+    RwvArticleList
+  },
+  mounted () {
+    this.$store.dispatch(FETCH_TAGS)
+  },
+  computed: {
+    ...mapGetters({
+      isAuth: [IS_AUTHENTICATED]
+    }),
+    ...mapState({
+      tags: state => state.home.tags
+    }),
+    tag () {
+      return this.$route.params.tag
+    }
   }
 }
 </script>

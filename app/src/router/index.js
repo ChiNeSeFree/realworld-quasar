@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
+import ApiService from '../common/api.service'
+import DateFilter from '../common/date.filter'
+import ErrorFilter from '../common/error.filter'
+
 import routes from './routes'
 
+ApiService.init()
 Vue.use(VueRouter)
 
 const Router = new VueRouter({
