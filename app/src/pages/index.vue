@@ -6,8 +6,28 @@
         <p>A place to share your <i>Quasar</i> knowledge.</p>
       </div>
     </div>
-    <q-page class="flex flex-center">
+    <q-page class="flex">
+      <div class="col-xs-9">
+        <q-tabs
+          color="white"
+          text-color="tertiary"
+          no-pane-border
+          align="left"
+          >
+          <!-- Tabs - notice slot="title" -->
+          <q-tab slot="title" name="tab-1" label="Your feed"/>
+          <q-tab default slot="title" name="tab-2" label="Global feed"/>
 
+          <!-- Targets -->
+          <q-tab-pane name="tab-1">Tab One</q-tab-pane>
+          <q-tab-pane name="tab-2">Tab Two</q-tab-pane>
+        </q-tabs>
+      </div>
+      <div class="col-xs-3">
+        <conduit-tags>
+
+        </conduit-tags>
+      </div>
     </q-page>
   </div>
 </template>
@@ -22,6 +42,7 @@
     box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.3), inset 0 -8px 8px -8px rgba(0, 0, 0, 0.3);
 .home-page .banner
   h1
+    font-family: "Titillium Web", sans-serif;
     margin: 0;
     padding: 0;
     text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -30,10 +51,29 @@
     padding-bottom: 0.5rem;
   p
     font-size: 2rem;
+.q-tabs
+  .q-tabs-panes
+    border-top: 1px solid #eee;
+    margin-top: -1px;
+    z-index: 2;
+.q-tab.active
+  color: $primary
+  z-index: 3;
+.conduit-tags
+  margin: 10px;
+  padding: 10px;
+  p.heading
+    font-weight: 400;
+    font-size: 1rem;
 </style>
 
 <script>
+import conduitTags from '../components/conduit-tags.vue'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  namespaced: true,
+  components: {
+    conduitTags,
+  }
 }
 </script>

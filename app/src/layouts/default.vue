@@ -19,17 +19,16 @@
         <q-toolbar-title class="navbar-brand clearfix">
           conduit
           <!-- <div slot="subtitle">Running on Quasar v{{ $q.version }}</div> -->
-
-          <q-btn flat class="right">
-            Sign up
-          </q-btn>
-          <q-btn flat class="right">
-            Sign in
-          </q-btn>
-          <q-btn flat class="right">
-            Home
-          </q-btn>
         </q-toolbar-title>
+        <q-btn flat class="gt-sm mobile-hide">
+          Sign up
+        </q-btn>
+        <q-btn flat class="gt-sm mobile-hide">
+          Sign in
+        </q-btn>
+        <q-btn flat class="gt-sm mobile-hide">
+          Home
+        </q-btn>
       </q-toolbar>
     </q-layout-header>
 
@@ -89,7 +88,7 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,700,900');
+  @import url('https://fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic');
   .clearfix:before,
   .clearfix:after {
     content: "";
@@ -107,7 +106,10 @@ export default {
     float: right;
   }
   body
-    font-family: "Titillium Web", sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #373a3c;
   .navbar-brand
     font-family: "Titillium Web", sans-serif;
     font-size: 1.75rem;
