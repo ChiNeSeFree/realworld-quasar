@@ -8,6 +8,9 @@ import ErrorFilter from '../common/error.filter'
 
 import routes from './routes'
 
+Vue.filter('date', DateFilter)
+Vue.filter('error', ErrorFilter)
+
 ApiService.init()
 Vue.use(VueRouter)
 Vue.use(Vuelidate)
