@@ -21,3 +21,6 @@ For more information on how to this works with other frontends/backends, head ov
 
 > npm install, npm start, etc.
 
+# Quasar-cli
+
+> v0.15.14
