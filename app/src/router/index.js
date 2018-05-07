@@ -5,6 +5,8 @@ import Vuelidate from 'vuelidate'
 import ApiService from '../common/api.service'
 import DateFilter from '../common/date.filter'
 import ErrorFilter from '../common/error.filter'
+import store from '../store/index'
+import { CHECK_AUTH } from '../store/actions.type'
 
 import routes from './routes'
 
@@ -30,5 +32,13 @@ const Router = new VueRouter({
   scrollBehavior: () => ({ y: 0 }),
   routes
 })
+
+Router.beforeEach(
+  (to, from, next) => {
+    return Promise
+      .all([store.dispatch(CHECK_AUTH)])
+      .then(next)
+  }
+)
 
 export default Router
