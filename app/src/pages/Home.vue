@@ -13,10 +13,15 @@
           text-color="tertiary"
           no-pane-border
           align="left"
+          v-model="selectedTab"
           >
           <!-- Tabs - notice slot="title" -->
-          <q-tab v-if="isAuth" slot="title" name="tab-1" label="Your feed"/>
-          <q-tab default slot="title" name="tab-2" label="Global feed"/>
+          <q-tab v-if="isAuth" slot="title" name="tab-1" label="Your feed" @click="hideTags()"/>
+          <q-tab slot="title" name="tab-2" label="Global feed" @click="hideTags()"/>
+          <q-tab v-if="tag" active="tag" slot="title" name="tab-3">
+            <q-icon name="ion-pound" />
+            {{ tag }}
+          </q-tab>
 
           <!-- Targets -->
           <q-tab-pane name="tab-1">
@@ -27,6 +32,11 @@
           <q-tab-pane name="tab-2">
             <div class="home-global">
               <RwvArticleList type="all" />
+            </div>
+          </q-tab-pane>
+          <q-tab-pane name="tab-3">
+            <div class="home-tag">
+              <RwvArticleList :tag="tag" />
             </div>
           </q-tab-pane>
         </q-tabs>
@@ -103,6 +113,20 @@ export default {
     RwvTag,
     RwvArticleList
   },
+  data() {
+    return {
+      // initializing for second tab to be selected by default
+      selectedTab: 'tab-2'
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      console.log(to);
+      if (to.name == 'home-tag') {
+        this.selectedTab = 'tab-3'
+      }
+    }
+  },
   mounted () {
     this.$store.dispatch(FETCH_TAGS)
   },
@@ -115,6 +139,11 @@ export default {
     }),
     tag () {
       return this.$route.params.tag
+    }
+  },
+  methods: {
+    hideTags: function() {
+      this.$router.push('/')
     }
   }
 }
