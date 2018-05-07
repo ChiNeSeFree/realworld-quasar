@@ -291,4 +291,8 @@ export default {
     text-align: center
   }
 
+  .error-messages
+    color: #B85C5C;
+    font-weight: bold;
+
 </style>

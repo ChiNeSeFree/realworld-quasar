@@ -9,9 +9,9 @@
               Have an account?
             </router-link>
           </p>
-          <!-- <ul v-if="errors" class="error-messages">
+          <ul v-if="errors" class="error-messages">
             <li v-for="(v, k) in errors" :key="k">{{k}} {{ v | error }}</li>
-          </ul> -->
+          </ul>
           <form @submit.prevent="()=>{}">
             <q-field
             class="form-group"
@@ -97,13 +97,20 @@ export default {
       this.submit = true
 
       this.$store.dispatch(REGISTER, {
-        email: this.email,
-        password: this.password,
-        username: this.username
+        email: this.form.email,
+        password: this.form.password,
+        username: this.form.username
       })
-      .then(() => {
+      .then((response) => {
         this.submit = false
-        this.$router.push({ name: 'home' })
+
+        if (response.user.id) {
+          this.$router.push({ name: 'home' })
+        } else {
+          return false;
+        }
+
+
       })
     }
   }

@@ -9,13 +9,13 @@
               Need an account?
             </router-link>
           </p>
-          <!-- <ul v-if="errors" class="error-messages">
+          <ul v-if="errors" class="error-messages">
             <li
               v-for="(v, k) in errors"
               :key="k">
               {{k}} {{ v | error }}
             </li>
-          </ul> -->
+          </ul>
           <form @submit.prevent="()=>{}">
             <q-field
               class="form-group"
@@ -89,7 +89,7 @@ export default {
       this.submit = true
 
       this.$store
-        .dispatch(LOGIN, { email, password })
+        .dispatch(LOGIN, { email: this.form.email, password: this.form.password })
         .then(() => {
           this.submit = false
           this.$router.push({ name: 'home' })
