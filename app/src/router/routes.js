@@ -26,7 +26,7 @@ export default [
       { path: 'profile-favorites', component: RwvProfileFavorited, name: 'favorites' },
       { path: 'tag/:tag', component: RwvHome, name: 'home-tag' },
       { path: '/articles/:slug', component: RwvArticle, name: 'article', props: true },
-      { path: '/editor/:slug', component: RwvArticleEdit, name: 'article-edit', props: true },
+      { path: '/editor/:slug?', component: RwvArticleEdit, name: 'article-edit', props: true },
     ]
   },
   { // Always leave this as last one

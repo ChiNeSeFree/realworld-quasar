@@ -4,37 +4,63 @@
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
           <RwvListErrors :errors="errors"/>
-          <form v-on:submit="onPublish(article.slug, article)">
-            <fieldset :disabled="inProgress">
-              <fieldset class="form-group">
-                <input
+            <fieldset :disabled="submit">
+              <q-field
+              class="form-group"
+              :error="$v.article.title.$error"
+              error-label="Please enter a title"
+              >
+                <q-input
                   type="text"
                   class="form-control form-control-lg"
                   v-model="article.title"
                   placeholder="Article Title">
-              </fieldset>
-              <fieldset class="form-group">
-                <input
+                </q-input>
+              </q-field>
+
+
+
+              <q-field
+              class="form-group"
+              :error="$v.article.description.$error"
+              error-label="Please enter a description"
+              >
+                <q-input
                   type="text"
                   class="form-control"
                   v-model="article.description"
                   placeholder="What's this article about?">
-              </fieldset>
-              <fieldset class="form-group">
-                <textarea
+                </q-input>
+              </q-field>
+
+
+
+              <q-field
+              class="form-group"
+              :error="$v.article.body.$error"
+              error-label="Please enter the article body"
+              >
+                <q-input
+                  type="textarea"
                   class="form-control"
                   rows="8"
                   v-model="article.body"
                   placeholder="Write your article (in markdown)">
-                </textarea>
-              </fieldset>
-              <fieldset class="form-group">
-                <input
+                </q-input>
+              </q-field>
+
+
+
+              <q-field
+              class="form-group"
+              >
+                <q-input
                   type="text"
                   class="form-control"
                   placeholder="Enter tags"
                   v-model="tagInput"
                   v-on:keypress.enter.prevent="addTag(tagInput)">
+                </q-input>
                 <div class="tag-list">
                   <span
                     class="tag-default tag-pill"
@@ -47,15 +73,21 @@
                 {{ tag }}
               </span>
                 </div>
-              </fieldset>
+              </q-field>
+
+
+
             </fieldset>
-            <button
-              :disabled="inProgress"
-              class="btn btn-lg pull-xs-right btn-primary"
-              type="submit">
-              Publish Article
-            </button>
-          </form>
+            <q-btn
+              color="primary"
+              class="right"
+              max-height="100"
+              rows="1"
+              label="Publish Article"
+              @click="onPublish()"
+              >
+
+            </q-btn>
         </div>
       </div>
     </div>
@@ -76,6 +108,7 @@
   import {
     GET_ARTICLE
   } from '../store/getters.type'
+  import { required } from 'vuelidate/lib/validators'
 
   export default {
     name: 'RwvArticleEdit',
@@ -111,8 +144,9 @@
     data () {
       return {
         tagInput: null,
-        inProgress: false,
-        errors: {}
+        submit: false,
+        errors: {},
+        error: false
       }
     },
     computed: {
@@ -120,21 +154,42 @@
         article: [GET_ARTICLE]
       })
     },
+    validations: {
+      article: {
+        title: { required },
+        description: { required },
+        body: { required }
+      }
+    },
     methods: {
       onPublish (slug, article) {
+
+        this.$v.article.$touch()
+
+        if (this.$v.article.$error || this.$v.article.$invalid) {
+          return false
+        }
+        console.log('slug')
+        console.log(slug)
         let action = slug ? ARTICLE_EDIT : ARTICLE_PUBLISH
-        this.inProgress = true
+        console.log('action');
+        console.log(action);
+        this.submit = true
         this.$store
           .dispatch(action)
           .then(({ data }) => {
-            this.inProgress = false
+            console.log('data');
+            console.log(data);
+            this.submit = false
             this.$router.push({
               name: 'article',
               params: { slug: data.article.slug }
             })
           })
           .catch(({ response }) => {
-            this.inProgress = false
+            console.log('response');
+            console.log(response);
+            this.submit = false
             this.errors = response.data.errors
           })
       },

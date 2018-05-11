@@ -50,6 +50,34 @@
           Home
         </router-link>
 
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          v-if="isAuth"
+          :to="{ name: 'article-edit' }">
+          <i class="ion-compose"></i>New Article
+        </router-link>
+
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          v-if="isAuth"
+          :to="{ name: 'settings' }">
+          <i class="ion-gear-a"></i>Settings
+        </router-link>
+
+        <router-link
+          class="nav-link"
+          active-class="active"
+          exact
+          v-if="isAuth"
+          :to="{ name: 'profile' }">
+          {{ currentUserName }}
+        </router-link>
+
+
       </q-toolbar>
     </q-layout-header>
 
@@ -113,7 +141,8 @@ export default {
   name: 'LayoutDefault',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      currentUserName: "geoidesic"
     }
   },
   computed: {
@@ -290,7 +319,7 @@ export default {
   .q-toolbar
     a
       margin: 0 1rem;
-  .auth-page
+  .auth-page, .editor-page
     .q-btn
       margin-top: 1rem
     h1,
